@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hpa-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/prasanth624/HPA-Kubernetes.git
+    targetRevision: HEAD
+    path: ./ 
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hpa-namespace
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
