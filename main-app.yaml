@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hpa-app
+  name: app-of-apps
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -9,13 +9,13 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/prasanth624/HPA-Kubernetes.git
+    repoURL: https://github.com/prasanth624/app-of-apps-ArgoCD.git 
     targetRevision: HEAD
-    path: ./ 
+    path: ./apps
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: argocd
 
   syncPolicy:
     automated:
